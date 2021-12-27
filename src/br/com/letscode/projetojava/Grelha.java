@@ -43,41 +43,19 @@ public class Grelha {
         }
     }
 
-    public static String[][] gerarGrelhaVazia() {
+    public static void atualizarGrelha(String[][] grelha) {
 
-        final int DIMENSAO_TABULEIRO = 10;
-
-        String[][] grelha = new String[DIMENSAO_TABULEIRO][DIMENSAO_TABULEIRO];
-
-        for (int i = 0; i < DIMENSAO_TABULEIRO; i++) {
-            for (int j = 0; j < DIMENSAO_TABULEIRO; j++) {
-                grelha[i][j] = " ";
-            }
-        }
-        return grelha;
-    }
-
-    public static void  mostrarGrelha() {
-
-        String[][] grelha = gerarGrelhaVazia();
         String[] linhas = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J"};
-
-        Scanner input = new Scanner(System.in);
-        String jogada = " ";
 
         mostrarCabecalho("jogador");
 
-        for (int i = 0; i < grelha.length; i++) {
-            for (int j = 0; j < grelha.length; j++) {
-                grelha[i][j] = jogada;
-            }
-        }
         for (int i = 0; i < grelha.length; i++) {
             System.out.printf("%n|  %s  |", linhas[i]);
             for (int j = 0; j < grelha.length; j++) {
                 System.out.printf("  %s  |", grelha[i][j]);
             }
             System.out.printf("%n");
+
             mostrarTracos();
 
         }

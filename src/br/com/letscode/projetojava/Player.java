@@ -4,78 +4,70 @@ import java.util.Scanner;
 
 public class Player {
 
-    //posiciona navios
+
     //ataca navio adversario
     //nome
     String nome;
     int naviosRestantes;
     int naviosAbatidos;
 
+
     final int QUANTIDADE_NAVIOS = 10;
-    Integer[][] naviosPosicionados = new Integer[QUANTIDADE_NAVIOS][QUANTIDADE_NAVIOS];
-    Integer[][] registroTirosJogador = new Integer[QUANTIDADE_NAVIOS][QUANTIDADE_NAVIOS];
+    String[][] naviosPosicionados = new String[QUANTIDADE_NAVIOS][QUANTIDADE_NAVIOS];
+    String[][] registroTirosJogador = new String[QUANTIDADE_NAVIOS][QUANTIDADE_NAVIOS];
 
     public Player(String nome) {
+
         this.nome = nome;
         this.naviosRestantes = 10;
         this.naviosAbatidos = 0;
     }
 
-    public void gerarGrelhaVazia() {
 
-
+    public void inicializarGrelha() {
 
         final int DIMENSAO_TABULEIRO = 10;
 
-        Integer[][] grelha = new Integer[DIMENSAO_TABULEIRO][DIMENSAO_TABULEIRO];
-
         for (int i = 0; i < DIMENSAO_TABULEIRO; i++) {
             for (int j = 0; j < DIMENSAO_TABULEIRO; j++) {
-                grelha[i][j] = 0;
+                this.naviosPosicionados[i][j] = " ";
             }
         }
-        this.naviosPosicionados = grelha;
+        Grelha.atualizarGrelha(naviosPosicionados);
     }
 
     public void posicionarNavios() {
 
 
+        Scanner input = new Scanner(System.in);
 
-        Scanner entradaCoordenada = new Scanner(System.in);
-        String[] coordenadas = new String[2];
-        int linha = 0;
-        int coluna = 0;
-
-        final int larguraGrelha = 10;
-
-//        String[] linhas = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J"};
+        String coordenadas = " ";
+        String[] coordenadasInformadas = new String[2];
+        Character L, C = ' ';
         String linhas = "ABCDEFGHIJ";
 
-        int navios = 0;
+        int linha, coluna, navios = 0;
+
+
 
         while (navios < 3) {
 
-            System.out.printf("Escolha uma posição na grelha pra atirar (L C): ");
+            System.out.printf("%nEscolha uma posição na grelha ( L - C ): ");
 
-            coordenadas[0] = entradaCoordenada.next().toUpperCase();
-            coordenadas[1] = entradaCoordenada.next();
+            coordenadas = input.next();
+            L = coordenadas.toUpperCase().charAt(0);
+            C = coordenadas.charAt(1);
 
+            coordenadasInformadas[0] = L.toString();
+            coordenadasInformadas[1] = C.toString();
 
-            linha = linhas.indexOf(coordenadas[0]);
-
-
-            coluna = Integer.parseInt(coordenadas[1]);
-
-            this.naviosPosicionados[linha][coluna] = 1;
-
-            navios += 1;
-
-            System.out.printf("Escolha uma posição na grelha pra atirar (L C): ");
+            if (linhas.contains(coordenadasInformadas[0])) {
+                linha = linhas.indexOf(coordenadasInformadas[0]);
+                coluna = Integer.parseInt(coordenadasInformadas[1]);
+                this.naviosPosicionados[linha][coluna] = "N";
+                navios++;
+            }
+            Grelha.atualizarGrelha(naviosPosicionados);
         }
-
     }
-
-
 }
-
-

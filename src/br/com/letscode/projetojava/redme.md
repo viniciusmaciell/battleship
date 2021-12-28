@@ -5,6 +5,7 @@
         if vazio ou preenchido
 
 2 - Logica Game
+
         if planilha
         placar -> navios abatidos
         chegou a 10 -> finaliza

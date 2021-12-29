@@ -39,27 +39,27 @@ public class Player {
     public void posicionarNavios() {
 
 
-        Scanner input = new Scanner(System.in);
-
-        String coordenadas = " ";
+//        Scanner input = new Scanner(System.in);
+//
+//        String coordenadas = " ";
         String[] coordenadasInformadas = new String[2];
-        Character L, C = ' ';
+//        Character L, C = ' ';
         String linhas = "ABCDEFGHIJ";
 
         int linha, coluna, navios = 0;
 
-
-
         while (navios < 3) {
 
-            System.out.printf("%nEscolha uma posição na grelha ( L - C ): ");
+            coordenadasInformadas = escolherCoordenadas();
 
-            coordenadas = input.next();
-            L = coordenadas.toUpperCase().charAt(0);
-            C = coordenadas.charAt(1);
-
-            coordenadasInformadas[0] = L.toString();
-            coordenadasInformadas[1] = C.toString();
+//            System.out.printf("%nEscolha uma posição na grelha ( L - C ): ");
+//
+//            coordenadas = input.next();
+//            L = coordenadas.toUpperCase().charAt(0);
+//            C = coordenadas.charAt(1);
+//
+//            coordenadasInformadas[0] = L.toString();
+//            coordenadasInformadas[1] = C.toString();
 
             if (linhas.contains(coordenadasInformadas[0])) {
                 linha = linhas.indexOf(coordenadasInformadas[0]);
@@ -68,7 +68,89 @@ public class Player {
                 navios++;
             }
             Grelha.atualizarGrelha(naviosPosicionados);
+        }
+    }
+    public String[] escolherCoordenadas(){
+        Scanner input = new Scanner(System.in);
+
+        String coordenadas = " ";
+        String[] coordenadasInformadas = new String[2];
+        Character L, C = ' ';
+
+        System.out.printf("%nEscolha uma posição na grelha ( L - C ): ");
+
+        coordenadas = input.next();
+        L = coordenadas.toUpperCase().charAt(0);
+        C = coordenadas.charAt(1);
+
+        coordenadasInformadas[0] = L.toString();
+        coordenadasInformadas[1] = C.toString();
+
+        return coordenadasInformadas;
+
+    }
+
+    public void atacarNavio(String[][] grelhaAdversario) {
+
+        boolean posicaoDisponivel = false;
+
+        Scanner input = new Scanner(System.in);
+        String coordenadas = " ";
+        String[] coordenadasInformadas = new String[2];
+        Character L, C = ' ';
+        String linhas = "ABCDEFGHIJ";
+
+        int linha = 0;
+        int coluna = 0;
+
+
+        while (posicaoDisponivel) {
+
+            System.out.printf("Escolha uma posição para atirar ( L - C ): ");
+
+            coordenadas = input.next();
+            L = coordenadas.toUpperCase().charAt(0);
+            C = coordenadas.charAt(1);
+
+            coordenadasInformadas[0] = L.toString();
+            coordenadasInformadas[1] = C.toString();
+
+            linha = linhas.indexOf(coordenadasInformadas[0]);
+            coluna = Integer.parseInt(coordenadasInformadas[1]);
+
+            if (this.tirosRegistrados[linha][coluna] != " ") {
+                System.err.println("Você já atirou nesta posição, tente outra !");
+            } else {
+                this.tirosRegistrados[linha][coluna] = "s";
+                this.coordenasdaDoTiro[0] = linha;
+                this.coordenasdaDoTiro[1] = coluna;
+                posicaoDisponivel = true;
+
+            }
 
         }
+
+
+        if (grelhaAdversario[linha][coluna] == "N") {
+            if (this.naviosPosicionados[linha][coluna] == "N") {
+                this.naviosPosicionados[linha][coluna] = "X";
+            } else {
+                this.naviosPosicionados[linha][coluna] = "*";
+                this.naviosAbatidos++;
+            }
+            grelhaAdversario[linha][coluna] = " ";
+            System.out.printf("Você acertou um navio adversário !");
+
+        } else if (grelhaAdversario[linha][coluna] == " ") {
+            if (this.naviosPosicionados[linha][coluna] == "N") {
+                this.naviosPosicionados[linha][coluna] = "n";
+            } else {
+                this.naviosPosicionados[linha][coluna] = "-";
+            }
+            System.out.printf("Tiro na água !");
+
+        }
+
+        Grelha.imprimirGrelha(this.naviosPosicionados);
     }
 }

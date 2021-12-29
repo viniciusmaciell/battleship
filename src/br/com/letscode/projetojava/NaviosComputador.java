@@ -2,7 +2,7 @@ package br.com.letscode.projetojava;
 
 import java.util.Random;
 
-public class NaviosPc {
+public class NaviosComputador {
     public static void main(String[] args) {
         int[] coordenadasPc = new int[2];
 

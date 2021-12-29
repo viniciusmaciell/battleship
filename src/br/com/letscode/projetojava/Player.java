@@ -68,6 +68,7 @@ public class Player {
                 navios++;
             }
             Grelha.atualizarGrelha(naviosPosicionados);
+
         }
     }
 }

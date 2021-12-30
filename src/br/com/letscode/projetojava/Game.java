@@ -1,11 +1,10 @@
 package br.com.letscode.projetojava;
 
-import java.util.Scanner;
-
 public class Game {
     public static void main(String[] args) {
-       Player jogador = new Player("Jogador");
+       Player jogador = new UserPlayer("Jogador");
        jogador.inicializarGrelha();
+       jogador.inicializarRegistroTiros();
        jogador.posicionarNavios();
 
 
@@ -69,53 +68,53 @@ public class Game {
 //        }
 
 
-        public void atacar(Player jogadorAtacado){
-            String[] posicaoDoTiro = escolherCoordenadas();
-            Game.avaliarTiro(posicaoDoTiro, this, jogadorAtacado);
-        }
-
-        public void avaliarTiro(String[] posicaoDoTiro, Player jogadorAtacante, Player jogadorAtacado){
-            String linhas = "ABCDEFGHIJ";
-            int linha = linhas.indexOf(posicaoTiro[0]);
-            int coluna = Integer.parseInt(coordenadasInformadas[1]);
-            //com navio posicionado
-            if(jogadorAtacante.grelha[linha][coluna] == "N"){
-                if (jogadorAtacado.grelha[linha][coluna] == "N" || jogadorAtacado.grelha[linha][coluna] == "n"){
-                    //tiro certeiro
-                    jogadorAtacante.grelha[linha][coluna] = "X";
-                    removerNavioAtacado(jogadorAtacado, linha, coluna);
-                    System.out.println("Você acertou um navio!");
-                }
-                else{
-                    //tiro na água
-                    jogadorAtacante.grelha[linha][coluna] = "n";
-                    System.out.println("Seu tiro foi na água!");
-                }
-            }
-            //sem navio posicionado
-            else{
-                if (jogadorAtacado.grelha[linha][coluna] == "N" || jogadorAtacado.grelha[linha][coluna] == "n"){
-                    //tiro certeiro
-                    jogadorAtacante.grelha[linha][coluna] = "*";
-                    removerNavioAtacado(jogadorAtacado, linha, coluna);
-                    System.out.println("Você acertou um navio!");
-                }
-                else{
-                    //tiro na água com navio posicionado
-                    jogadorAtacante.grelha[linha][coluna] = "-";
-                    System.out.println("Seu tiro foi na água!");
-                }
-            }
-
-        }
-
-        public void removerNavioAtacado(Player jogadorAtacado, int linha, int coluna){
-            if (jogadorAtacado.grelha[linha][coluna] == "N"){
-                jogadorAtacado.grelha[linha][coluna] = " ";
-            }
-            else{
-                jogadorAtacado.grelha[linha][coluna] = "-";
-            }
-        }
+//        public void atacar(Player jogadorAtacado){
+//            String[] posicaoDoTiro = escolherCoordenadas();
+//            Game.avaliarTiro(posicaoDoTiro, this, jogadorAtacado);
+//        }
+//
+//        public void avaliarTiro(String[] posicaoDoTiro, Player jogadorAtacante, Player jogadorAtacado){
+//            String linhas = "ABCDEFGHIJ";
+//            int linha = linhas.indexOf(posicaoTiro[0]);
+//            int coluna = Integer.parseInt(coordenadasInformadas[1]);
+//            //com navio posicionado
+//            if(jogadorAtacante.naviosPosicionados[linha][coluna] == "N"){
+//                if (jogadorAtacado.naviosPosicionados[linha][coluna] == "N" || jogadorAtacado.naviosPosicionados[linha][coluna] == "n"){
+//                    //tiro certeiro
+//                    jogadorAtacante.naviosPosicionados[linha][coluna] = "X";
+//                    removerNavioAtacado(jogadorAtacado, linha, coluna);
+//                    System.out.println("Você acertou um navio!");
+//                }
+//                else{
+//                    //tiro na água
+//                    jogadorAtacante.naviosPosicionados[linha][coluna] = "n";
+//                    System.out.println("Seu tiro foi na água!");
+//                }
+//            }
+//            //sem navio posicionado
+//            else{
+//                if (jogadorAtacado.naviosPosicionados[linha][coluna] == "N" || jogadorAtacado.naviosPosicionados[linha][coluna] == "n"){
+//                    //tiro certeiro
+//                    jogadorAtacante.naviosPosicionados[linha][coluna] = "*";
+//                    removerNavioAtacado(jogadorAtacado, linha, coluna);
+//                    System.out.println("Você acertou um navio!");
+//                }
+//                else{
+//                    //tiro na água com navio posicionado
+//                    jogadorAtacante.naviosPosicionados[linha][coluna] = "-";
+//                    System.out.println("Seu tiro foi na água!");
+//                }
+//            }
+//
+//        }
+//
+//        public void removerNavioAtacado(Player jogadorAtacado, int linha, int coluna){
+//            if (jogadorAtacado.naviosPosicionados[linha][coluna] == "N"){
+//                jogadorAtacado.naviosPosicionados[linha][coluna] = " ";
+//            }
+//            else{
+//                jogadorAtacado.naviosPosicionados[linha][coluna] = "-";
+//            }
+//       }
     }
 }

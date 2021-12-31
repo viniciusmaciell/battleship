@@ -1,4 +1,6 @@
-package br.com.letscode.projetojava;
+package br.com.letscode.projetojava.player;
+
+import br.com.letscode.projetojava.Grelha;
 
 import java.util.Scanner;
 
@@ -6,25 +8,30 @@ public abstract class Player {
 
     //ataca navio adversario
     //nome
-    String nome;
-    int naviosAbatidos;
+    public String nome;
+    public int naviosAbatidos;
 
     Integer[] coordenasdaDoTiro = new Integer[2];
     final int QUANTIDADE_NAVIOS = 10;
-    String[][] naviosPosicionados = new String[QUANTIDADE_NAVIOS][QUANTIDADE_NAVIOS];
+    public  String[][] naviosPosicionados = new String[QUANTIDADE_NAVIOS][QUANTIDADE_NAVIOS];
     String[][] registroTirosJogador = new String[QUANTIDADE_NAVIOS][QUANTIDADE_NAVIOS];
 
-
-    public Player(String nome) {
-
-        this.nome = nome;
+    public Player() {
+        setNome();
         this.naviosAbatidos = 0;
-        inicializarGrelha();
-        inicializarRegistroTiros();
+        inicializarGrelha(this.naviosPosicionados);
+        inicializarGrelha(this.registroTirosJogador);
+
+//        inicializarRegistroTiros();
     }
 
+    public void setNome() {
+        Scanner inputNome = new Scanner(System.in);
+        System.out.println("Escreva seu nome: ");
+        this.nome = inputNome.next();
+    }
 
-    public void inicializarGrelha() {
+    public void inicializarGrelha(String[][] grelha) {
 
         final int DIMENSAO_TABULEIRO = 10;
 
@@ -127,14 +134,11 @@ public abstract class Player {
                 this.coordenasdaDoTiro[0] = linha;
                 this.coordenasdaDoTiro[1] = coluna;
                 posicaoDisponivel = false;
-
             }
-
         }
 
-
-        if (grelhaAdversario[linha][coluna] == "N") {
-            if (this.naviosPosicionados[linha][coluna] == "N") {
+        if (grelhaAdversario[linha][coluna] == "N" || grelhaAdversario[linha][coluna] == "n") {
+            if (this.naviosPosicionados[linha][coluna] == "N"  || this.naviosPosicionados[linha][coluna] == "n") {
                 this.naviosPosicionados[linha][coluna] = "X";
             } else {
                 this.naviosPosicionados[linha][coluna] = "*";

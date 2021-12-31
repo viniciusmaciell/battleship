@@ -1,15 +1,15 @@
-package br.com.letscode.projetojava;
-
-import br.com.letscode.projetojava.Player;
+package br.com.letscode.projetojava.player;
 
 import java.util.Scanner;
 
 public class UserPlayer extends Player {
 
-    public UserPlayer(String nome) {
-        super(nome);
+    public UserPlayer() {
+
     }
-    public int[] escolherCoordenadas(String mensagem){
+
+
+    public int[] escolherCoordenadas(){
         Scanner input = new Scanner(System.in);
         String linhas = "ABCDEFGHIJ";
         String coordenadas = " ";

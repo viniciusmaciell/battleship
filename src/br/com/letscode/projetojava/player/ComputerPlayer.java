@@ -3,7 +3,6 @@ package br.com.letscode.projetojava.player;
 import br.com.letscode.projetojava.Grelha;
 
 import java.util.Random;
-import java.util.Scanner;
 
 public class ComputerPlayer extends Player {
 
@@ -20,23 +19,23 @@ public class ComputerPlayer extends Player {
 
     @Override
     public int[] escolherCoordenadas() {
-        int[] coordenadasPc = new int[2];
+        int[] coordenadasComputador = new int[2];
         Random aleatorio = new Random();
 
-        coordenadasPc[0] = aleatorio.nextInt(10);
-        coordenadasPc[1] = aleatorio.nextInt(10);
+        coordenadasComputador[0] = aleatorio.nextInt(10);
+        coordenadasComputador[1] = aleatorio.nextInt(10);
 
-        return coordenadasPc;
+        return coordenadasComputador;
     }
 
     @Override
     public void posicionarNavios() {
 
-        int[] coordenadasInformadas = new int[2];
+        int[] coordenadasInformadas;
 
         int navios = 0;
 
-        while (navios < 3) {
+        while (navios < this.TOTAL_NAVIOS) {
 
             coordenadasInformadas = escolherCoordenadas();
 
@@ -46,7 +45,7 @@ public class ComputerPlayer extends Player {
             }
         }
         System.out.printf("%n");
-        Grelha.atualizarGrelha(naviosPosicionados, nome);
+        Grelha.imprimirGrelha(naviosPosicionados, nome);
     }
 
     @Override
@@ -54,11 +53,9 @@ public class ComputerPlayer extends Player {
 
         boolean posicaoDisponivel = true;
 
-        int[] coordenadasInformadas = new int[2];
+        int[] coordenadasInformadas;
         int linha = 0;
         int coluna = 0;
-        String linhas = "ABCDEFGHIJ";
-
 
         while (posicaoDisponivel) {
             coordenadasInformadas = escolherCoordenadas();
@@ -67,8 +64,7 @@ public class ComputerPlayer extends Player {
             coluna = coordenadasInformadas[1];
 
             if (this.registroTirosJogador[linha][coluna] == " ") {
-//                System.out.println(this.registroTirosJogador[linha][coluna]);
-                this.registroTirosJogador[linha][coluna] = "s";
+                this.registroTirosJogador[linha][coluna] = "shot";
                 this.coordenasdaDoTiro[0] = linha;
                 this.coordenasdaDoTiro[1] = coluna;
                 posicaoDisponivel = false;
@@ -91,7 +87,7 @@ public class ComputerPlayer extends Player {
             } else {
                 this.naviosPosicionados[linha][coluna] = "-";
             }
-            System.out.printf("O computador atirou na água !");
+            System.out.printf("%nO Computador errou o tiro.");
 
         }
 

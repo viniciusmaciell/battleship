@@ -1,14 +1,16 @@
 package br.com.letscode.projetojava.player;
 
+import br.com.letscode.projetojava.Grelha;
+
 import java.util.Scanner;
 
 public class UserPlayer extends Player {
 
     public UserPlayer() {
-
+        Grelha.imprimirGrelha(this.naviosPosicionados, this.nome);
     }
 
-
+    @Override
     public int[] escolherCoordenadas(){
         Scanner input = new Scanner(System.in);
         String linhas = "ABCDEFGHIJ";
@@ -20,8 +22,6 @@ public class UserPlayer extends Player {
         int coluna;
 
         do{
-            System.out.printf(mensagem);
-
             coordenadas = input.next();
             L = coordenadas.toUpperCase().charAt(0);
             C = coordenadas.charAt(1);
@@ -31,14 +31,21 @@ public class UserPlayer extends Player {
 
             coluna = Integer.parseInt(coordenadasRecebidas[1]);
 
+            linha = linhas.indexOf(coordenadasRecebidas[0]);
+
+            coordenadasInformadas[0] = linha;
+            coordenadasInformadas[1] = coluna;
+
+            return coordenadasInformadas;
+
         }while(!linhas.contains(coordenadasRecebidas[0]) || coluna < 0 || coluna > 9);
 
-        linha = linhas.indexOf(coordenadasRecebidas[0]);
-
-        coordenadasInformadas[0] = linha;
-        coordenadasInformadas[1] = coluna;
-
-        return coordenadasInformadas;
+//        linha = linhas.indexOf(coordenadasRecebidas[0]);
+//
+//        coordenadasInformadas[0] = linha;
+//        coordenadasInformadas[1] = coluna;
+//
+//        return coordenadasInformadas;
 
     }
 }

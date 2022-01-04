@@ -46,11 +46,12 @@ public class Grelha {
         }
     }
 
-    public static void atualizarGrelha(String[][] grelha) {
+    public static void imprimirGrelha(String[][] grelha, String nome) {
 
         String[] linhas = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J"};
 
-        mostrarCabecalho("jogador");
+        System.out.printf("%n");
+        mostrarCabecalho(nome);
 
         for (int i = 0; i < grelha.length; i++) {
             System.out.printf("%n|  %s  |", linhas[i]);

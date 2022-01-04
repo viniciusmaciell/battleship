@@ -1,121 +1,93 @@
 package br.com.letscode.projetojava;
 
+import br.com.letscode.projetojava.player.ComputerPlayer;
+import br.com.letscode.projetojava.player.Player;
+import br.com.letscode.projetojava.player.UserPlayer;
+
 import java.util.Scanner;
 
 public class Game {
-    public static void main(String[] args) {
-       Player jogador = new Player("Jogador");
-       jogador.inicializarGrelha();
-       jogador.posicionarNavios();
 
-
+//    public static void main(String[] args) {
 //
-//        jogador1.gerarGrelhaVazia();
+//        UserPlayer jogador = new UserPlayer();
+//        jogador.posicionarNavios();
 //
-//        for (int i = 0; i < jogador1.naviosPosicionados.length; i++) {
-//            for (int j = 0; j <jogador1.naviosPosicionados.length ; j++) {
-//                System.out.println(jogador1.naviosPosicionados[i][j]);
-//            }
 //
+//        ComputerPlayer pc = new ComputerPlayer();
+//        pc.posicionarNavios();
+//
+//        while (jogador.naviosAbatidos < jogador.TOTAL_NAVIOS && pc.naviosAbatidos < pc.TOTAL_NAVIOS) {
+//
+//            jogador.atacarNavio(pc.naviosPosicionados);
+//
+//            pc.atacarNavio(jogador.naviosPosicionados);
+//
+//            Game.exibirPlacar(jogador, pc);
 //        }
-//
-//        jogador1.posicionarNavios();
-//        for (int i = 0; i < jogador1.naviosPosicionados.length; i++) {
-//            for (int j = 0; j <jogador1.naviosPosicionados.length ; j++) {
-//                System.out.println(jogador1.naviosPosicionados[i][j]);
-//            }
-//
-//        }
+//    }
+
+    public static void exibirPlacar(UserPlayer jogador, ComputerPlayer computador) {
+
+        System.out.printf("%nPLACAR%n%s %d x %d %s%n", jogador.nome, jogador.naviosAbatidos,
+                computador.naviosAbatidos, computador.nome);
+    }
+
+    public static void inicializarGame() {
+
+        System.out.println("Bem vindo ao jogo BATALHA NAVAL");
+
+    }
+
+    public static void executarGame() {
+        inicializarGame();
+
+        UserPlayer jogador = new UserPlayer();
+        ComputerPlayer computador = new ComputerPlayer();
 
 
-//        Scanner input = new Scanner(System.in);
-//        String coordenadas = " ";
-//        String[] arrayCoordenadas = new String[2];
-//        Character L, C = ' ';
-//        int linha, coluna = 0;
-//
-//        final int larguraGrelha = 10;
-//
-////        String[] linhas = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J"};
-//        String linhas = "ABCDEFGHIJ";
-//        Integer[][] naviosPosicionados = new Integer[10][10];
-//        int navios = 0;
-//
-//        while (navios < 3) {
-//
-//            System.out.printf("Escolha uma posição (L C): ");
-//
-//            coordenadas = input.next();
-//            L = coordenadas.toUpperCase().charAt(0);
-//            C = coordenadas.charAt(1);
-//
-//            arrayCoordenadas[0] = L.toString().toUpperCase();
-//            arrayCoordenadas[1] = C.toString();
-//
-//
-//            if (linhas.contains(arrayCoordenadas[0])) {
-//                linha = linhas.indexOf(arrayCoordenadas[0]);
-//                coluna = Integer.parseInt(arrayCoordenadas[1]);
-//                naviosPosicionados[linha][coluna] = 1;
-//                navios++;
-//            }
-//
-//        }
-//
-//        for (int i = 0; i < naviosPosicionados.length; i++) {
-//            for (int j = 0; j < naviosPosicionados.length; j++) {
-//                System.out.println(naviosPosicionados[i][j]);
-//            }
-//        }
+        jogador.posicionarNavios();
+        computador.posicionarNavios();
 
+        while (jogador.naviosAbatidos < jogador.TOTAL_NAVIOS &&
+                computador.naviosAbatidos < computador.TOTAL_NAVIOS) {
 
-        public void atacar(Player jogadorAtacado){
-            String[] posicaoDoTiro = escolherCoordenadas();
-            Game.avaliarTiro(posicaoDoTiro, this, jogadorAtacado);
+            jogador.atacarNavio(computador.naviosPosicionados);
+            if (jogador.naviosAbatidos == jogador.TOTAL_NAVIOS)
+                break;
+
+            computador.atacarNavio(jogador.naviosPosicionados);
+
+            if (computador.naviosAbatidos == computador.TOTAL_NAVIOS)
+                break;
+
+            Game.exibirPlacar(jogador, computador);
+            Grelha.imprimirGrelha(jogador.naviosPosicionados, jogador.nome);
         }
 
-        public void avaliarTiro(String[] posicaoDoTiro, Player jogadorAtacante, Player jogadorAtacado){
-            String linhas = "ABCDEFGHIJ";
-            int linha = linhas.indexOf(posicaoTiro[0]);
-            int coluna = Integer.parseInt(coordenadasInformadas[1]);
-            //com navio posicionado
-            if(jogadorAtacante.grelha[linha][coluna] == "N"){
-                if (jogadorAtacado.grelha[linha][coluna] == "N" || jogadorAtacado.grelha[linha][coluna] == "n"){
-                    //tiro certeiro
-                    jogadorAtacante.grelha[linha][coluna] = "X";
-                    removerNavioAtacado(jogadorAtacado, linha, coluna);
-                    System.out.println("Você acertou um navio!");
-                }
-                else{
-                    //tiro na água
-                    jogadorAtacante.grelha[linha][coluna] = "n";
-                    System.out.println("Seu tiro foi na água!");
-                }
-            }
-            //sem navio posicionado
-            else{
-                if (jogadorAtacado.grelha[linha][coluna] == "N" || jogadorAtacado.grelha[linha][coluna] == "n"){
-                    //tiro certeiro
-                    jogadorAtacante.grelha[linha][coluna] = "*";
-                    removerNavioAtacado(jogadorAtacado, linha, coluna);
-                    System.out.println("Você acertou um navio!");
-                }
-                else{
-                    //tiro na água com navio posicionado
-                    jogadorAtacante.grelha[linha][coluna] = "-";
-                    System.out.println("Seu tiro foi na água!");
-                }
-            }
+        Game.exibirResultadosFinais(jogador, computador);
 
+    }
+
+    public static void exibirResultadosFinais(UserPlayer jogador, ComputerPlayer computador) {
+        if (jogador.naviosAbatidos == jogador.TOTAL_NAVIOS) {
+            System.out.printf("%nParábens! Você venceu o Jogo.%n");
+        } else {
+            System.out.printf("%nO Computador venceu ...");
         }
 
-        public void removerNavioAtacado(Player jogadorAtacado, int linha, int coluna){
-            if (jogadorAtacado.grelha[linha][coluna] == "N"){
-                jogadorAtacado.grelha[linha][coluna] = " ";
-            }
-            else{
-                jogadorAtacado.grelha[linha][coluna] = "-";
-            }
-        }
+        Grelha.mostrarTracos();
+
+        System.out.printf("%nRESULTADOS FINAIS%n");
+
+        Game.exibirPlacar(jogador, computador);
+
+        System.out.printf("%n");
+
+        Grelha.imprimirGrelha(jogador.naviosPosicionados, jogador.nome);
+
+        Grelha.imprimirGrelha(computador.naviosPosicionados, computador.nome);
+
+
     }
 }

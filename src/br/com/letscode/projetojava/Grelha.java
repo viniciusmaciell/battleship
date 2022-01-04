@@ -1,5 +1,8 @@
 package br.com.letscode.projetojava;
 
+import br.com.letscode.projetojava.player.Player;
+import br.com.letscode.projetojava.player.UserPlayer;
+
 import java.util.Scanner;
 
 public class Grelha {

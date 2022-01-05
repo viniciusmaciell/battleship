@@ -52,11 +52,11 @@ public class Game {
         while (jogador.naviosAbatidos < jogador.TOTAL_NAVIOS &&
                 computador.naviosAbatidos < computador.TOTAL_NAVIOS) {
 
-            jogador.atacarNavio(computador.naviosPosicionados);
+            jogador.atacarNavio(computador);
+
             if (jogador.naviosAbatidos == jogador.TOTAL_NAVIOS)
                 break;
-
-            computador.atacarNavio(jogador.naviosPosicionados);
+            computador.atacarNavio(jogador);
 
             if (computador.naviosAbatidos == computador.TOTAL_NAVIOS)
                 break;
@@ -73,7 +73,7 @@ public class Game {
         if (jogador.naviosAbatidos == jogador.TOTAL_NAVIOS) {
             System.out.printf("%nParábens! Você venceu o Jogo.%n");
         } else {
-            System.out.printf("%nO Computador venceu ...");
+            System.out.printf("%nO Computador venceu ...%n");
         }
 
         Grelha.mostrarTracos();
@@ -88,6 +88,47 @@ public class Game {
 
         Grelha.imprimirGrelha(computador.naviosPosicionados, computador.nome);
 
+    }
 
+    public static void avaliarTiro(int[] posicaoDoTiro, Player jogadorAtacante, Player jogadorAtacado){
+        System.out.printf("%ngame avaliando tiro");
+        int linha = posicaoDoTiro[0];
+        int coluna = posicaoDoTiro[1];
+
+        if (jogadorAtacado.naviosPosicionados[linha][coluna] == "N" || jogadorAtacado.naviosPosicionados[linha][coluna] == "n" || jogadorAtacado.naviosPosicionados[linha][coluna] == "X") {
+            if (jogadorAtacante.naviosPosicionados[linha][coluna] == "N" || jogadorAtacante.naviosPosicionados[linha][coluna] == "n") {
+                jogadorAtacante.naviosPosicionados[linha][coluna] = "X";
+            } else {
+                jogadorAtacante.naviosPosicionados[linha][coluna] = "*";
+//                jogadorAtacante.naviosAbatidos++;
+            }
+//            jogadorAtacado.naviosPosicionados[linha][coluna] = " ";
+            jogadorAtacante.naviosAbatidos++;
+            removerNavioAtacado(jogadorAtacado, linha, coluna);
+            System.out.printf("%nNO ALVO !!!%nVocê ABATEU um navio adversário !%n");
+
+        } else if (jogadorAtacado.naviosPosicionados[linha][coluna] == " " || jogadorAtacado.naviosPosicionados[linha][coluna] == "-" || jogadorAtacado.naviosPosicionados[linha][coluna] == "*") {
+            if (jogadorAtacante.naviosPosicionados[linha][coluna] == "N") {
+                jogadorAtacante.naviosPosicionados[linha][coluna] = "n";
+            } else {
+                jogadorAtacante.naviosPosicionados[linha][coluna] = "-";
+            }
+            System.out.printf("%nSPLASH... Tiro na água.%n");
+        }
+    }
+
+    public static void removerNavioAtacado(Player jogadorAtacado, int linha, int coluna){
+        System.out.println();
+        System.out.println("game removendo navio");
+        System.out.printf("posicao atacada " + linha + "," + coluna + " tinha " + jogadorAtacado.naviosPosicionados[linha][coluna]);
+        if (jogadorAtacado.naviosPosicionados[linha][coluna] == "N"){
+            jogadorAtacado.naviosPosicionados[linha][coluna] = " ";
+        }
+        else if (jogadorAtacado.naviosPosicionados[linha][coluna] == "n"){
+            jogadorAtacado.naviosPosicionados[linha][coluna] = "-";
+        }
+        else{
+            jogadorAtacado.naviosPosicionados[linha][coluna] = "*";
+        }
     }
 }

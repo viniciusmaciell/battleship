@@ -1,5 +1,6 @@
 package br.com.letscode.projetojava.player;
 
+import br.com.letscode.projetojava.Game;
 import br.com.letscode.projetojava.Grelha;
 
 import java.util.Random;
@@ -22,8 +23,8 @@ public class ComputerPlayer extends Player {
         int[] coordenadasComputador = new int[2];
         Random aleatorio = new Random();
 
-        coordenadasComputador[0] = aleatorio.nextInt(10);
-        coordenadasComputador[1] = aleatorio.nextInt(10);
+        coordenadasComputador[0] = aleatorio.nextInt(2);
+        coordenadasComputador[1] = aleatorio.nextInt(2);
 
         return coordenadasComputador;
     }
@@ -49,13 +50,12 @@ public class ComputerPlayer extends Player {
     }
 
     @Override
-    public void atacarNavio(String[][] grelhaAdversario) {
-
+    public void atacarNavio(Player adversario) {
         boolean posicaoDisponivel = true;
 
-        int[] coordenadasInformadas;
-        int linha = 0;
-        int coluna = 0;
+        int[] coordenadasInformadas = {0,0};
+        int linha;
+        int coluna;
 
         while (posicaoDisponivel) {
             coordenadasInformadas = escolherCoordenadas();
@@ -71,25 +71,7 @@ public class ComputerPlayer extends Player {
             }
         }
 
-        if (grelhaAdversario[linha][coluna] == "N" || grelhaAdversario[linha][coluna] == "n") {
-            if (this.naviosPosicionados[linha][coluna] == "N" || this.naviosPosicionados[linha][coluna] == "n") {
-                this.naviosPosicionados[linha][coluna] = "X";
-            } else {
-                this.naviosPosicionados[linha][coluna] = "*";
-                this.naviosAbatidos++;
-            }
-            grelhaAdversario[linha][coluna] = " ";
-            System.out.printf("O computador abateu um navio seu !");
-
-        } else if (grelhaAdversario[linha][coluna] == " ") {
-            if (this.naviosPosicionados[linha][coluna] == "N") {
-                this.naviosPosicionados[linha][coluna] = "n";
-            } else {
-                this.naviosPosicionados[linha][coluna] = "-";
-            }
-            System.out.printf("%nO Computador errou o tiro.");
-
-        }
-
+        Game.avaliarTiro(coordenadasInformadas, this, adversario);
+        Grelha.imprimirGrelha(this.naviosPosicionados, nome);
     }
 }

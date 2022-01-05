@@ -1,5 +1,6 @@
 package br.com.letscode.projetojava.player;
 
+import br.com.letscode.projetojava.Game;
 import br.com.letscode.projetojava.Grelha;
 
 import java.util.Scanner;
@@ -67,7 +68,7 @@ public abstract class Player {
 
     public abstract int[] escolherCoordenadas();
 
-    public void atacarNavio(String[][] grelhaAdversario) {
+    public void atacarNavio2(String[][] grelhaAdversario) {
 
         boolean posicaoDisponivel = true;
 
@@ -118,46 +119,33 @@ public abstract class Player {
 //        Grelha.imprimirGrelha(this.naviosPosicionados, nome);
     }
 
-    //    public void inicializarRegistroTiros() {
-//
-//        final int DIMENSAO_TABULEIRO = 10;
-//
-//        for (int i = 0; i < DIMENSAO_TABULEIRO; i++) {
-//            for (int j = 0; j < DIMENSAO_TABULEIRO; j++) {
-//                this.registroTirosJogador[i][j] = " ";
-//            }
-//        }
-////        Grelha.imprimirGrelha(registroTirosJogador, nome);
-//    }
-//    public void posicionarNavios() {
-//
-//        Scanner input = new Scanner(System.in);
-//
-//        String coordenadas = " ";
-//        String[] coordenadasInformadas = new String[2];
-//        Character L, C = ' ';
-//        String linhas = "ABCDEFGHIJ";
-//
-//        int linha, coluna, navios = 0;
-//
-//        while (navios < DIMENSAO_TABULEIRO) {
-//
-//            System.out.printf("%nPosicione o %dº navio ( L - C ): ", navios + 1);
-//
-//            coordenadas = input.next();
-//            L = coordenadas.toUpperCase().charAt(0);
-//            C = coordenadas.charAt(1);
-//
-//            coordenadasInformadas[0] = L.toString();
-//            coordenadasInformadas[1] = C.toString();
-//
-//            if (linhas.contains(coordenadasInformadas[0])) {
-//                linha = linhas.indexOf(coordenadasInformadas[0]);
-//                coluna = Integer.parseInt(coordenadasInformadas[1]);
-//                this.naviosPosicionados[linha][coluna] = "N";
-//                navios++;
-//            }
-//            Grelha.imprimirGrelha(naviosPosicionados);
-//        }
-////    }
+    public void atacarNavio(Player adversario) {
+
+        boolean posicaoDisponivel = true;
+
+        int[] coordenadasInformadas = {0,0};
+        int linha;
+        int coluna;
+
+        while (posicaoDisponivel) {
+            System.out.printf("%nInforme as coordenadas para o TIRO [ L - C ]: ");
+            coordenadasInformadas = escolherCoordenadas();
+
+            linha = coordenadasInformadas[0];
+            coluna = coordenadasInformadas[1];
+
+            if (this.registroTirosJogador[linha][coluna] != " ") {
+                System.err.println("Você já atirou nesta posição, tente outra !");
+            } else {
+                this.registroTirosJogador[linha][coluna] = "shot";
+                this.coordenasdaDoTiro[0] = linha;
+                this.coordenasdaDoTiro[1] = coluna;
+                posicaoDisponivel = false;
+            }
+        }
+
+        Game.avaliarTiro(coordenadasInformadas, this, adversario);
+
+        Grelha.imprimirGrelha(this.naviosPosicionados, nome);
+    }
 }

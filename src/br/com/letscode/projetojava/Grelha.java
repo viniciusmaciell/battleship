@@ -24,7 +24,7 @@ public class Grelha {
         }
         System.out.printf("%s%n", nomeJogador);
 
-        mostrarTracos();
+        mostrarTracos(); 
         final int DIMENSAO_TABULEIRO = 10;
 
         System.out.printf("%n|     |");

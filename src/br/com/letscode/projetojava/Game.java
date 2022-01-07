@@ -102,9 +102,7 @@ public class Game {
                 jogadorAtacante.naviosPosicionados[linha][coluna] = "X";
             } else {
                 jogadorAtacante.naviosPosicionados[linha][coluna] = "*";
-//                jogadorAtacante.naviosAbatidos++;
             }
-//            jogadorAtacado.naviosPosicionados[linha][coluna] = " ";
             jogadorAtacante.naviosAbatidos++;
 
             removerNavioAtacado(jogadorAtacado, linha, coluna);

@@ -11,6 +11,9 @@ public class Grelha {
 
         final int QUANTIDADE_TRACOS = 67;
         final int POSICIONAR_NOME = (QUANTIDADE_TRACOS - nome.length()) / 2;
+        final String CYAN_BACKGROUND = "\033[46m";
+        final String RESET_BACKGROUND = "\033[0m";
+        final String BLACK_BOLD = "\033[1;30m";
 
         String nomeJogador = nome.toUpperCase();
 
@@ -22,7 +25,7 @@ public class Grelha {
             System.out.printf(" ");
 
         }
-        System.out.printf("%s%n", nomeJogador);
+        System.out.printf(CYAN_BACKGROUND + BLACK_BOLD + "%s" + RESET_BACKGROUND + "%n", nomeJogador);
 
         mostrarTracos(); 
         final int DIMENSAO_TABULEIRO = 10;

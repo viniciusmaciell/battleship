@@ -8,24 +8,52 @@ import java.util.Scanner;
 
 public class Game {
 
-//    public static void main(String[] args) {
-//
-//        UserPlayer jogador = new UserPlayer();
-//        jogador.posicionarNavios();
-//
-//
-//        ComputerPlayer pc = new ComputerPlayer();
-//        pc.posicionarNavios();
-//
-//        while (jogador.naviosAbatidos < jogador.TOTAL_NAVIOS && pc.naviosAbatidos < pc.TOTAL_NAVIOS) {
-//
-//            jogador.atacarNavio(pc.naviosPosicionados);
-//
-//            pc.atacarNavio(jogador.naviosPosicionados);
-//
-//            Game.exibirPlacar(jogador, pc);
-//        }
-//    }
+    public static void executarGame() {
+        Scanner input = new Scanner(System.in);
+        boolean continuarJogando = true;
+        int resposta;
+
+        inicializarGame();
+
+        while (continuarJogando) {
+            UserPlayer jogador = new UserPlayer();
+            ComputerPlayer computador = new ComputerPlayer();
+
+
+            jogador.posicionarNavios();
+            computador.posicionarNaviosAuto();
+
+            while (jogador.naviosAbatidos < jogador.TOTAL_NAVIOS &&
+                    computador.naviosAbatidos < computador.TOTAL_NAVIOS) {
+
+                jogador.atacarNavio(computador);
+                if (jogador.naviosAbatidos == jogador.TOTAL_NAVIOS) {
+                    break;
+                }
+
+                computador.atacarNavio(jogador);
+                if (computador.naviosAbatidos == computador.TOTAL_NAVIOS) {
+                    break;
+                }
+
+                Game.exibirPlacar(jogador, computador);
+                Grelha.imprimirGrelha(jogador.naviosPosicionados, jogador.nome);
+            }
+
+            Game.exibirResultadosFinais(jogador, computador);
+
+
+            System.out.printf("%nDeseja jogar novamente ?%n [1] - Continuar \t [2]- Parar %n");
+            resposta = input.nextInt();
+            if (resposta == 1) {
+                continuarJogando = true;
+
+            } else {
+                continuarJogando = false;
+                System.out.println("Até a próxima !");
+            }
+        }
+    }
 
     public static void exibirPlacar(UserPlayer jogador, ComputerPlayer computador) {
 

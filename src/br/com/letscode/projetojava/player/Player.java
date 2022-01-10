@@ -103,7 +103,9 @@ public abstract class Player {
             }
         }
         System.out.printf("%n");
-        Grelha.imprimirGrelha(naviosPosicionados, nome);
+        if (this instanceof UserPlayer) {
+            Grelha.imprimirGrelha(naviosPosicionados, nome);
+        }
     }
 
 }

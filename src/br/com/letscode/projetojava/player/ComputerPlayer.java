@@ -9,8 +9,10 @@ public class ComputerPlayer extends Player {
 
     @Override
     public void setNome() {
-        this.nome = "Computador";
+        this.nome = "COMPUTADOR";
     }
+
+
 
     @Override
     public void atacarNavio(Player adversario) {

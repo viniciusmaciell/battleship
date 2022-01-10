@@ -1,5 +1,6 @@
 package br.com.letscode.projetojava.player;
 
+import br.com.letscode.projetojava.Colors;
 import br.com.letscode.projetojava.Game;
 import br.com.letscode.projetojava.Grelha;
 
@@ -26,7 +27,7 @@ public class UserPlayer extends Player {
                 navios++;
                 Grelha.imprimirGrelha(this.naviosPosicionados, nome);
             } else {
-                System.err.println("Ops! Você já posicionou um navio aqui, tente outra coordenada ...");
+                System.err.println(Colors.MAGENTA + "Ops! Você já posicionou um navio aqui, tente outra coordenada ...");
             }
         }
     }
@@ -37,7 +38,7 @@ public class UserPlayer extends Player {
         Integer resposta = 0;
 
         System.out.printf("%n%s, como gostaria de posicionar seus navios ?%n" +
-                "1- Manual \t2- Automático ", this.nome);
+                "[1] - Manual \t [2] - Automático ", this.nome);
 
         resposta = input.nextInt();
 
@@ -66,7 +67,7 @@ public class UserPlayer extends Player {
             coluna = coordenadasInformadas[1];
 
             if (this.registroTirosJogador[linha][coluna] != " ") {
-                System.err.println("Você já atirou nesta posição, tente outra !");
+                System.err.println(Colors.MAGENTA + "Você já atirou nesta posição, tente outra !");
             } else {
                 this.registroTirosJogador[linha][coluna] = "shot";
                 this.coordenasdaDoTiro[0] = linha;

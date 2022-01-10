@@ -1,5 +1,8 @@
 package br.com.letscode.projetojava;
 
+import br.com.letscode.projetojava.player.*;
+
+import br.com.letscode.projetojava.player.ComputerPlayer;
 import br.com.letscode.projetojava.player.Player;
 import br.com.letscode.projetojava.player.UserPlayer;
 
@@ -10,12 +13,9 @@ public class Grelha {
     public static void mostrarCabecalho(String nome) {
 
         final int QUANTIDADE_TRACOS = 67;
-        final int POSICIONAR_NOME = (QUANTIDADE_TRACOS - nome.length()) / 2;
-        final String CYAN_BACKGROUND = "\033[46m";
-        final String RESET_BACKGROUND = "\033[0m";
-        final String BLACK_BOLD = "\033[1;30m";
+        final float POSICIONAR_NOME = (QUANTIDADE_TRACOS - nome.length()) / 2.2f;
 
-        String nomeJogador = nome.toUpperCase();
+        String nomeJogador = "  " + nome.toUpperCase() + "  ";
 
         mostrarTracos();
 
@@ -25,7 +25,16 @@ public class Grelha {
             System.out.printf(" ");
 
         }
-        System.out.printf(CYAN_BACKGROUND + BLACK_BOLD + "%s" + RESET_BACKGROUND + "%n", nomeJogador);
+
+        if (nome == "COMPUTADOR") {
+            System.out.print(Colors.BLACK);
+            System.out.print(Colors.WHITE_BACKGROUND);
+            System.out.println(nomeJogador + Colors.RESET_BACKGROUND);
+        } else {
+            System.out.print(Colors.BLACK);
+            System.out.print(Colors.BLUE_BACKGROUND);
+            System.out.println(nomeJogador + Colors.RESET_BACKGROUND);
+        }
 
         mostrarTracos(); 
         final int DIMENSAO_TABULEIRO = 10;

@@ -4,6 +4,8 @@ import br.com.letscode.projetojava.player.ComputerPlayer;
 import br.com.letscode.projetojava.player.Player;
 import br.com.letscode.projetojava.player.UserPlayer;
 
+import java.awt.*;
+import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class Game {
@@ -50,42 +52,47 @@ public class Game {
 
             } else {
                 continuarJogando = false;
-                System.out.println("Até a próxima !");
+                System.out.println("Até a próxima! ");
             }
         }
     }
 
     public static void exibirPlacar(UserPlayer jogador, ComputerPlayer computador) {
+        System.out.printf("%n");
+        System.out.printf("%n");
+        System.out.print(Colors.WHITE_BACKGROUND_BRIGHT);
+        System.out.println(Colors.BLACK_BOLD + "   PLACAR   " + Colors.RESET_BACKGROUND);
+        System.out.print(Colors.WHITE_BACKGROUND_BRIGHT);
+        System.out.println(Colors.BLACK_BOLD + jogador.nome + " " + jogador.naviosAbatidos + " x " + computador.naviosAbatidos + " " + computador.nome + Colors.RESET_BACKGROUND);
 
-        System.out.printf("%nPLACAR%n%s %d x %d %s%n", jogador.nome, jogador.naviosAbatidos,
-                computador.naviosAbatidos, computador.nome);
+        //System.out.printf("%nPLACAR%n%s %d x %d %s%n", jogador.nome, jogador.naviosAbatidos,computador.naviosAbatidos, computador.nome);
     }
 
     public static void inicializarGame() {
 
-        System.out.println("Bem vindo ao jogo BATALHA NAVAL");
+        System.out.println("\uD83D\uDEA2" + " Bem vindo ao jogo BATALHA NAVAL " + "\uD83D\uDEA2"	);
 
     }
 
     public static void exibirResultadosFinais(UserPlayer jogador, ComputerPlayer computador) {
         if (jogador.naviosAbatidos == jogador.TOTAL_NAVIOS) {
-            System.out.printf("%nParábens! Você venceu o Jogo.%n");
+            System.out.printf("%n %n");
+            System.out.println(Colors.GREEN_BOLD_BRIGHT + "Parabéns! Você venceu o Jogo." + Colors.RESET);
         } else {
-            System.out.printf("%nO Computador venceu ...%n");
+            System.out.printf("%n %n");
+            System.out.println(Colors.RED_BOLD_BRIGHT + "O Computador venceu ..." + Colors.RESET);
         }
-
-        Grelha.mostrarTracos();
-
-        System.out.printf("%nRESULTADOS FINAIS%n");
-
-        Game.exibirPlacar(jogador, computador);
-
         System.out.printf("%n");
+        System.out.print(Colors.WHITE_BACKGROUND_BRIGHT);
+        System.out.println(Colors.BLACK_BOLD + " RESULTADOS FINAIS " + Colors.RESET_BACKGROUND);
+        System.out.println(Colors.WHITE_BRIGHT + jogador.nome + " " + jogador.naviosAbatidos + " x " + computador.naviosAbatidos + " " + computador.nome + Colors.RESET_BACKGROUND);
 
         Grelha.imprimirGrelha(jogador.naviosPosicionados, jogador.nome);
-
         Grelha.imprimirGrelha(computador.naviosPosicionados, computador.nome);
 
+
+        //Game.exibirPlacar(jogador, computador);
+        //System.out.printf("%n");
     }
 
     public static void avaliarTiro(int[] posicaoDoTiro, Player jogadorAtacante, Player jogadorAtacado) {
@@ -108,10 +115,20 @@ public class Game {
             removerNavioAtacado(jogadorAtacado, linha, coluna);
 
             if (jogadorAtacante instanceof UserPlayer) {
-
-                System.out.printf("%nNO ALVO !!!%nVocê ABATEU um navio do computador !%n");
+                System.out.print(Colors.BLACK_BOLD);
+                System.out.print(Colors.GREEN_BACKGROUND);
+                System.out.println("  \uD83D\uDCA3  NO ALVO !!! \uD83D\uDCA5  " + Colors.RESET);
+                System.out.print(Colors.WHITE_BOLD_BRIGHT);
+                System.out.print(Colors.GREEN_BACKGROUND);
+                System.out.print(" Você ABATEU um navio do computador! " + Colors.RESET);
             } else {
-                System.out.printf("%n NAVIO AO MAR... O computador AFUNDOU um de seus navios. %n");
+                System.out.printf("%n");
+                System.out.print(Colors.BLACK_BOLD);
+                System.out.print(Colors.RED_BACKGROUND);
+                System.out.println("  \uD83D\uDCA3  NAVIO AO MAR... \uD83D\uDCA5  " + Colors.RESET);
+                System.out.print(Colors.WHITE_BOLD_BRIGHT);
+                System.out.print(Colors.RED_BACKGROUND);
+                System.out.print(" O computador AFUNDOU um de seus navios. " + Colors.RESET);
             }
 
         } else if (jogadorAtacado.naviosPosicionados[linha][coluna] == " " ||
@@ -124,9 +141,14 @@ public class Game {
             }
 
             if (jogadorAtacante instanceof UserPlayer) {
-                System.out.printf("%nSPLASH... Tiro na água.%n");
+                System.out.print(Colors.BLACK_BOLD);
+                System.out.print(Colors.CYAN_BACKGROUND);
+                System.out.println("  \uD83D\uDCA6  SPLASH... \uD83D\uDCA6  " + Colors.RESET);
+                System.out.print(Colors.WHITE_BOLD_BRIGHT);
+                System.out.print(Colors.CYAN_BACKGROUND);
+                System.out.print(" Tiro na água. " + Colors.RESET);
             } else {
-                System.out.printf("%n O computador ERROU o tiro, sua vez...%n");
+                System.out.printf(Colors.CYAN + "%n O computador ERROU o tiro, sua vez..." + Colors.RESET);
             }
         }
     }
@@ -141,3 +163,4 @@ public class Game {
         }
     }
 }
+

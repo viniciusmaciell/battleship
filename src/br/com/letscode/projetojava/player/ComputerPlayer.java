@@ -12,8 +12,6 @@ public class ComputerPlayer extends Player {
         this.nome = "COMPUTADOR";
     }
 
-
-
     @Override
     public void atacarNavio(Player adversario) {
         boolean posicaoDisponivel = true;
@@ -37,6 +35,6 @@ public class ComputerPlayer extends Player {
         }
 
         Game.avaliarTiro(coordenadasInformadas, this, adversario);
-        Grelha.imprimirGrelha(this.naviosPosicionados, nome);
+//        Grelha.imprimirGrelha(this.naviosPosicionados, nome);
     }
 }

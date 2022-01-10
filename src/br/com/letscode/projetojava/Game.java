@@ -40,9 +40,10 @@ public class Game {
 
                 Game.exibirPlacar(jogador, computador);
                 Grelha.imprimirGrelha(jogador.naviosPosicionados, jogador.nome);
+                System.out.printf("%n");
             }
 
-            Game.exibirResultadosFinais(jogador, computador);
+            exibirResultadosFinais(jogador, computador);
 
 
             System.out.printf("%nDeseja jogar novamente ?%n [1] - Continuar \t [2]- Parar %n");
@@ -80,7 +81,7 @@ public class Game {
             System.out.println(Colors.GREEN_BOLD_BRIGHT + "Parabéns! Você venceu o Jogo." + Colors.RESET);
         } else {
             System.out.printf("%n %n");
-            System.out.println(Colors.RED_BOLD_BRIGHT + "O Computador venceu ..." + Colors.RESET);
+            System.out.println(Colors.RED_BOLD_BRIGHT + "O Computador venceu..." + Colors.RESET);
         }
         System.out.printf("%n");
         System.out.print(Colors.WHITE_BACKGROUND_BRIGHT);

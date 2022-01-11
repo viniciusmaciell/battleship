@@ -19,7 +19,7 @@ public class UserPlayer extends Player {
 
         while (navios < this.TOTAL_NAVIOS) {
 
-            System.out.printf("%nPosicione seu %dº navio [ linha coluna ] :", navios + 1);
+            System.out.printf("%nPosicione seu %dº navio [ linha coluna ] : %n", navios + 1);
             coordenadasInformadas = escolherCoordenadas();
 
             if (this.naviosPosicionados[coordenadasInformadas[0]][coordenadasInformadas[1]] == " ") {
@@ -60,7 +60,7 @@ public class UserPlayer extends Player {
         int coluna;
 
         while (posicaoDisponivel) {
-            System.out.printf("%nInforme as coordenadas para o TIRO [ L - C ]: ");
+            System.out.printf("%nInforme as coordenadas para o TIRO [ L - C ]: %n");
             coordenadasInformadas = escolherCoordenadas();
 
             linha = coordenadasInformadas[0];

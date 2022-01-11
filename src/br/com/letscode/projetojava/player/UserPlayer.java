@@ -62,6 +62,7 @@ public class UserPlayer extends Player {
         while (posicaoDisponivel) {
             System.out.printf("%nInforme as coordenadas para o TIRO [ L - C ]: %n");
             coordenadasInformadas = escolherCoordenadas();
+            System.out.printf("%n");
 
             linha = coordenadasInformadas[0];
             coluna = coordenadasInformadas[1];
@@ -77,8 +78,9 @@ public class UserPlayer extends Player {
         }
 
         Game.avaliarTiro(coordenadasInformadas, this, adversario);
-
+        System.out.printf("%n");
         Grelha.imprimirGrelha(this.naviosPosicionados, nome);
+        System.out.printf("%n");
     }
 }
 

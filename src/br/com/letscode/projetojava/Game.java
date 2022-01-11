@@ -100,16 +100,16 @@ public class Game {
         int linha = posicaoDoTiro[0];
         int coluna = posicaoDoTiro[1];
 
-        if (jogadorAtacado.naviosPosicionados[linha][coluna] == "N" ||
-                jogadorAtacado.naviosPosicionados[linha][coluna] == "n" ||
-                jogadorAtacado.naviosPosicionados[linha][coluna] == "X") {
+        if (jogadorAtacado.naviosPosicionados[linha][coluna] == Modificadores.NAVIO.toString() ||
+                jogadorAtacado.naviosPosicionados[linha][coluna] == Modificadores.TIRO_NA_AGUA_NAVIO.toString() ||
+                jogadorAtacado.naviosPosicionados[linha][coluna] == Modificadores.TIRO_NO_NAVIO_NAVIO.toString()) {
 
-            if (jogadorAtacante.naviosPosicionados[linha][coluna] == "N" ||
-                    jogadorAtacante.naviosPosicionados[linha][coluna] == "n") {
+            if (jogadorAtacante.naviosPosicionados[linha][coluna] == Modificadores.NAVIO.toString() ||
+                    jogadorAtacante.naviosPosicionados[linha][coluna] == Modificadores.TIRO_NA_AGUA_NAVIO.toString()) {
 
-                jogadorAtacante.naviosPosicionados[linha][coluna] = "X";
+                jogadorAtacante.naviosPosicionados[linha][coluna] = Modificadores.TIRO_NO_NAVIO_NAVIO.toString();
             } else {
-                jogadorAtacante.naviosPosicionados[linha][coluna] = "*";
+                jogadorAtacante.naviosPosicionados[linha][coluna] = Modificadores.TIRO_NO_NAVIO.toString();
             }
             jogadorAtacante.naviosAbatidos++;
 
@@ -132,13 +132,13 @@ public class Game {
                 System.out.print(" O computador AFUNDOU um de seus navios. " + Colors.RESET);
             }
 
-        } else if (jogadorAtacado.naviosPosicionados[linha][coluna] == " " ||
-                jogadorAtacado.naviosPosicionados[linha][coluna] == "-" ||
-                jogadorAtacado.naviosPosicionados[linha][coluna] == "*") {
-            if (jogadorAtacante.naviosPosicionados[linha][coluna] == "N") {
-                jogadorAtacante.naviosPosicionados[linha][coluna] = "n";
+        } else if (jogadorAtacado.naviosPosicionados[linha][coluna] == Modificadores.AGUA.toString() ||
+                jogadorAtacado.naviosPosicionados[linha][coluna] == Modificadores.TIRO_NA_AGUA.toString() ||
+                jogadorAtacado.naviosPosicionados[linha][coluna] == Modificadores.TIRO_NO_NAVIO.toString()) {
+            if (jogadorAtacante.naviosPosicionados[linha][coluna] == Modificadores.NAVIO.toString()) {
+                jogadorAtacante.naviosPosicionados[linha][coluna] = Modificadores.TIRO_NA_AGUA_NAVIO.toString();
             } else {
-                jogadorAtacante.naviosPosicionados[linha][coluna] = "-";
+                jogadorAtacante.naviosPosicionados[linha][coluna] = Modificadores.TIRO_NA_AGUA.toString();
             }
 
             if (jogadorAtacante instanceof UserPlayer) {
@@ -155,12 +155,12 @@ public class Game {
     }
 
     public static void removerNavioAtacado(Player jogadorAtacado, int linha, int coluna){
-        if (jogadorAtacado.naviosPosicionados[linha][coluna] == "N") {
-            jogadorAtacado.naviosPosicionados[linha][coluna] = " ";
-        } else if (jogadorAtacado.naviosPosicionados[linha][coluna] == "n") {
-            jogadorAtacado.naviosPosicionados[linha][coluna] = "-";
+        if (jogadorAtacado.naviosPosicionados[linha][coluna] == Modificadores.NAVIO.toString()) {
+            jogadorAtacado.naviosPosicionados[linha][coluna] = Modificadores.AGUA.toString();
+        } else if (jogadorAtacado.naviosPosicionados[linha][coluna] == Modificadores.TIRO_NA_AGUA_NAVIO.toString()) {
+            jogadorAtacado.naviosPosicionados[linha][coluna] = Modificadores.TIRO_NA_AGUA.toString();
         } else {
-            jogadorAtacado.naviosPosicionados[linha][coluna] = "*";
+            jogadorAtacado.naviosPosicionados[linha][coluna] = Modificadores.TIRO_NO_NAVIO.toString();
         }
     }
 }

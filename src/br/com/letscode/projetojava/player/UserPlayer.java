@@ -3,10 +3,12 @@ package br.com.letscode.projetojava.player;
 import br.com.letscode.projetojava.Colors;
 import br.com.letscode.projetojava.Game;
 import br.com.letscode.projetojava.Grelha;
+import br.com.letscode.projetojava.Modificadores;
 
 import java.util.Scanner;
 
 public class UserPlayer extends Player {
+
 
     public UserPlayer() {
         Grelha.imprimirGrelha(this.naviosPosicionados, this.nome);
@@ -15,19 +17,24 @@ public class UserPlayer extends Player {
     public void posicionarManual() {
         int[] coordenadasInformadas;
 
-        int navios = 0;
+//        int navios = 0;
 
-        while (navios < this.TOTAL_NAVIOS) {
+        while (this.quantidadeDeNavios < this.TOTAL_NAVIOS) {
 
-            System.out.printf("%nPosicione seu %dº navio [ linha coluna ] : %n", navios + 1);
+            System.out.printf("%nPosicione seu %dº navio [ linha coluna ] : %n", this.quantidadeDeNavios + 1);
             coordenadasInformadas = escolherCoordenadas();
 
-            if (this.naviosPosicionados[coordenadasInformadas[0]][coordenadasInformadas[1]] == " ") {
-                this.naviosPosicionados[coordenadasInformadas[0]][coordenadasInformadas[1]] = "N";
-                navios++;
+            if (posicaoDisponivelParaNavio(coordenadasInformadas)) {
+                adicionarNavio(coordenadasInformadas);
                 Grelha.imprimirGrelha(this.naviosPosicionados, nome);
-            } else {
-                System.err.println(Colors.MAGENTA + "Ops! Você já posicionou um navio aqui, tente outra coordenada ...");
+            }
+//            if (naviosPosicionados[coordenadasInformadas[0]][coordenadasInformadas[1]] == Modificadores.AGUA.toString()) {
+//                this.naviosPosicionados[coordenadasInformadas[0]][coordenadasInformadas[1]] = Modificadores.NAVIO.toString();
+//                navios++;
+//                Grelha.imprimirGrelha(this.naviosPosicionados, nome);
+//            }
+            else {
+                System.err.println(Colors.MAGENTA + "Ops! Você já posicionou um navio aqui, tente outra coordenada...");
             }
         }
     }
@@ -68,7 +75,7 @@ public class UserPlayer extends Player {
             coluna = coordenadasInformadas[1];
 
             if (this.registroTirosJogador[linha][coluna] != " ") {
-                System.err.println(Colors.MAGENTA + "Você já atirou nesta posição, tente outra !");
+                System.err.println(Colors.MAGENTA + "Você já atirou nesta posição, tente outra!");
             } else {
                 this.registroTirosJogador[linha][coluna] = "shot";
                 this.coordenasdaDoTiro[0] = linha;
@@ -79,7 +86,7 @@ public class UserPlayer extends Player {
 
         Game.avaliarTiro(coordenadasInformadas, this, adversario);
         System.out.printf("%n");
-        Grelha.imprimirGrelha(this.naviosPosicionados, nome);
+        Grelha.imprimirGrelha(this.naviosPosicionados, this.nome);
         System.out.printf("%n");
     }
 }

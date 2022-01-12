@@ -13,7 +13,7 @@ public class Game {
     public static void executarGame() {
         Scanner input = new Scanner(System.in);
         boolean continuarJogando = true;
-        int resposta;
+        int resposta = 0;
 
         inicializarGame();
 
@@ -46,15 +46,29 @@ public class Game {
             exibirResultadosFinais(jogador, computador);
 
 
-            System.out.printf("%nDeseja jogar novamente ?%n [1] - Continuar \t [2]- Parar %n");
-            resposta = input.nextInt();
-            if (resposta == 1) {
-                continuarJogando = true;
+//            System.out.printf("%nDeseja jogar novamente ?%n [1] - Continuar \t [2]- Parar %n");
+//            resposta = input.nextInt();
+//            if (resposta == 1) {
+//                continuarJogando = true;
+//
+//            } else {
+//                continuarJogando = false;
+//                System.out.println("Até a próxima! ");
+//            }
 
-            } else {
-                continuarJogando = false;
-                System.out.println("Até a próxima! ");
+            while( resposta != 1 || resposta != 2) {
+                System.out.printf("%nDeseja jogar novamente ?%n [1] - Continuar \t [2]- Parar %n");
+                resposta = input.nextInt();
+                if (resposta == 1) {
+                    continuarJogando = true;
+                    break;
+                } else if (resposta == 2) {
+                    continuarJogando = false;
+                    System.out.println("Até a próxima! ");
+                    break;
+                }
             }
+
         }
     }
 

@@ -9,7 +9,6 @@ import java.util.Scanner;
 
 public class UserPlayer extends Player {
 
-
     public UserPlayer() {
         Grelha.imprimirGrelha(this.naviosPosicionados, this.nome);
     }
@@ -17,25 +16,13 @@ public class UserPlayer extends Player {
     public void posicionarManual() {
         int[] coordenadasInformadas;
 
-//        int navios = 0;
-
         while (this.quantidadeDeNavios < this.TOTAL_NAVIOS) {
 
-            System.out.printf("%nPosicione seu %dº navio [ linha coluna ] : %n", this.quantidadeDeNavios + 1);
-            coordenadasInformadas = escolherCoordenadas();
+            String mensagem = "%nPosicione seu %dº navio [ linha coluna ] : %n" + this.quantidadeDeNavios + 1;
+            coordenadasInformadas = escolherCoordenadas(mensagem);
+            adicionarNavio(coordenadasInformadas);
+            Grelha.imprimirGrelha(this.naviosPosicionados, nome);
 
-            if (posicaoDisponivelParaNavio(coordenadasInformadas)) {
-                adicionarNavio(coordenadasInformadas);
-                Grelha.imprimirGrelha(this.naviosPosicionados, nome);
-            }
-//            if (naviosPosicionados[coordenadasInformadas[0]][coordenadasInformadas[1]] == Modificadores.AGUA.toString()) {
-//                this.naviosPosicionados[coordenadasInformadas[0]][coordenadasInformadas[1]] = Modificadores.NAVIO.toString();
-//                navios++;
-//                Grelha.imprimirGrelha(this.naviosPosicionados, nome);
-//            }
-            else {
-                System.err.println(Colors.MAGENTA + "Ops! Você já posicionou um navio aqui, tente outra coordenada...");
-            }
         }
     }
 
@@ -67,8 +54,8 @@ public class UserPlayer extends Player {
         int coluna;
 
         while (posicaoDisponivel) {
-            System.out.printf("%nInforme as coordenadas para o TIRO [ L - C ]: %n");
-            coordenadasInformadas = escolherCoordenadas();
+            String mensagem = "Informe as coordenadas para o TIRO [ L - C ]: ";
+            coordenadasInformadas = escolherCoordenadas(mensagem);
             System.out.printf("%n");
 
             linha = coordenadasInformadas[0];

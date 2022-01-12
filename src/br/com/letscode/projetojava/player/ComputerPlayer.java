@@ -1,9 +1,6 @@
 package br.com.letscode.projetojava.player;
 
 import br.com.letscode.projetojava.Game;
-import br.com.letscode.projetojava.Grelha;
-
-import java.util.Random;
 
 public class ComputerPlayer extends Player {
 
@@ -16,7 +13,7 @@ public class ComputerPlayer extends Player {
     public void atacarNavio(Player adversario) {
         boolean posicaoDisponivel = true;
 
-        int[] coordenadasInformadas = {0,0};
+        int[] coordenadasInformadas = new int[2];
         int linha;
         int coluna;
 
@@ -28,13 +25,12 @@ public class ComputerPlayer extends Player {
 
             if (this.registroTirosJogador[linha][coluna] == " ") {
                 this.registroTirosJogador[linha][coluna] = "shot";
-                this.coordenasdaDoTiro[0] = linha;
-                this.coordenasdaDoTiro[1] = coluna;
+//                this.coordenasdaDoTiro[0] = linha;
+//                this.coordenasdaDoTiro[1] = coluna;
                 posicaoDisponivel = false;
             }
         }
 
         Game.avaliarTiro(coordenadasInformadas, this, adversario);
-//        Grelha.imprimirGrelha(this.naviosPosicionados, nome);
     }
 }

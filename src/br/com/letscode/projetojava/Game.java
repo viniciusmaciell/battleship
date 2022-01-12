@@ -3,9 +3,6 @@ package br.com.letscode.projetojava;
 import br.com.letscode.projetojava.player.ComputerPlayer;
 import br.com.letscode.projetojava.player.Player;
 import br.com.letscode.projetojava.player.UserPlayer;
-
-import java.awt.*;
-import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class Game {
@@ -144,14 +141,12 @@ public class Game {
             if (jogadorAtacante instanceof UserPlayer) {
                 System.out.print(Colors.BLACK_BOLD);
                 System.out.print(Colors.CYAN_BACKGROUND);
-                System.out.println("  \uD83D\uDCA6  SPLASH... \uD83D\uDCA6  " + Colors.RESET);
-                System.out.print(Colors.WHITE_BOLD_BRIGHT);
-                System.out.print(Colors.CYAN_BACKGROUND);
-                System.out.print(" Tiro na água. " + Colors.RESET);
+                System.out.println("  \uD83D\uDCA6  SPLASH... Tiro na água. \uD83D\uDCA6  " + Colors.RESET);
+
             } else {
-                System.out.print(Colors.WHITE_BOLD_BRIGHT);
+                System.out.print(Colors.BLACK_BOLD);
                 System.out.print(Colors.CYAN_BACKGROUND);
-                System.out.print("  \uD83D\uDCA6  O computador ERROU o tiro, sua vez... \uD83D\uDCA6  " + Colors.RESET);
+                System.out.print("  \uD83D\uDCA6  O computador ERROU o tiro. \uD83D\uDCA6  " + Colors.RESET);
             }
         }
     }

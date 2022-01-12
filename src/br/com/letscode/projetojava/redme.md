@@ -14,7 +14,7 @@
 5 - Computador herdar de Player
         Sobrescrever escolherCoordenadas
 
-Pedir nome do jogador
+Pedir simbolo do jogador
 Imprimir placar da rodada no cabeçalho
 Como linkar pastas?
         

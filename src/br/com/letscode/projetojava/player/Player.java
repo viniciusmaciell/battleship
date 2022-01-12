@@ -1,6 +1,5 @@
 package br.com.letscode.projetojava.player;
 
-import br.com.letscode.projetojava.Colors;
 import br.com.letscode.projetojava.Grelha;
 import br.com.letscode.projetojava.Modificadores;
 
@@ -15,7 +14,7 @@ public abstract class Player {
     public int naviosRestantes;
 
     final int DIMENSAO_TABULEIRO = 10;
-    public final int TOTAL_NAVIOS = 2;
+    public final int TOTAL_NAVIOS = 10;
 
     Integer[] coordenasdaDoTiro = new Integer[2];
     public String[][] naviosPosicionados = new String[DIMENSAO_TABULEIRO][DIMENSAO_TABULEIRO];
@@ -39,8 +38,6 @@ public abstract class Player {
 
     public void inicializarGrelha(String[][] grelha) {
 
-//        final int DIMENSAO_TABULEIRO = 10;
-
         for (int i = 0; i < DIMENSAO_TABULEIRO; i++) {
             for (int j = 0; j < DIMENSAO_TABULEIRO; j++) {
                 grelha[i][j] = " ";
@@ -54,8 +51,8 @@ public abstract class Player {
         int[] coordenadasComputador = new int[2];
         Random aleatorio = new Random();
 
-        coordenadasComputador[0] = aleatorio.nextInt(2);
-        coordenadasComputador[1] = aleatorio.nextInt(2);
+        coordenadasComputador[0] = aleatorio.nextInt(10);
+        coordenadasComputador[1] = aleatorio.nextInt(10);
 
         return coordenadasComputador;
     }
@@ -64,15 +61,9 @@ public abstract class Player {
 
         int[] coordenadasInformadas;
 
-//        int navios = 0;
-
         while (this.quantidadeDeNavios < this.TOTAL_NAVIOS) {
 
             coordenadasInformadas = gerarCoordenadasAuto();
-//            if (naviosPosicionados[coordenadasInformadas[0]][coordenadasInformadas[1]] == Modificadores.AGUA.toString()) {
-//                this.naviosPosicionados[coordenadasInformadas[0]][coordenadasInformadas[1]] = Modificadores.NAVIO.toString();
-//                navios++;
-//            }
 
             if (posicaoDisponivelParaNavio(coordenadasInformadas)) {
                 adicionarNavio(coordenadasInformadas);
@@ -84,11 +75,11 @@ public abstract class Player {
         }
     }
 
-    public boolean posicaoDisponivelParaNavio(int[] coordenadas){
+    public boolean posicaoDisponivelParaNavio(int[] coordenadas) {
         return this.naviosPosicionados[coordenadas[0]][coordenadas[1]] == Modificadores.AGUA.toString();
     }
 
-    public void adicionarNavio(int[] coordenadas){
+    public void adicionarNavio(int[] coordenadas) {
         this.naviosPosicionados[coordenadas[0]][coordenadas[1]] = Modificadores.NAVIO.toString();
         this.quantidadeDeNavios++;
     }

@@ -3,7 +3,6 @@ package br.com.letscode.projetojava.player;
 import br.com.letscode.projetojava.Colors;
 import br.com.letscode.projetojava.Game;
 import br.com.letscode.projetojava.Grelha;
-import br.com.letscode.projetojava.Modificadores;
 
 import java.util.Scanner;
 
@@ -18,7 +17,7 @@ public class UserPlayer extends Player {
 
         while (this.quantidadeDeNavios < this.TOTAL_NAVIOS) {
 
-            String mensagem = "%nPosicione seu %dº navio [ linha coluna ] : %n" + this.quantidadeDeNavios + 1;
+            String mensagem = "\nPosicione seu " + (this.quantidadeDeNavios + 1) + "º navio [ linha coluna ] :";
             coordenadasInformadas = escolherCoordenadas(mensagem);
             adicionarNavio(coordenadasInformadas);
             Grelha.imprimirGrelha(this.naviosPosicionados, nome);
@@ -46,21 +45,25 @@ public class UserPlayer extends Player {
     }
 
     public int[] escolherCoordenadas(String mensagem) {
+
         Scanner input = new Scanner(System.in);
-        String linhas = "ABCDEFGHIJ";
-        String coordenadas = " ";
+
         String[] coordenadasRecebidas = new String[2];
         int[] coordenadasInformadas = new int[2];
+
+        String linhas = "ABCDEFGHIJ";
+        String coordenadas = " ";
+
         Character L, C = ' ';
         int linha;
         int coluna = 0;
+
         boolean coordenadaInvalida = true;
         boolean colunaInvalida = false;
 
         while(coordenadaInvalida){
             while (coordenadas.length() != 2) {
                 System.out.println(mensagem);
-//                System.out.printf("%nPosicione seu %dº navio [ linha coluna ] : %n", this.quantidadeDeNavios + 1);
                 coordenadas = input.next();
             }
 
@@ -68,7 +71,7 @@ public class UserPlayer extends Player {
             coordenadasRecebidas[0] = L.toString();
 
             if(!linhas.contains(coordenadasRecebidas[0])){
-                System.out.println("linha invalida");
+                System.out.println(Colors.MAGENTA_BOLD + "LINHA INVÁLIDA" + Colors.RESET);
                 coordenadas = " ";
                 continue;
             }
@@ -79,12 +82,11 @@ public class UserPlayer extends Player {
             try {
                 coluna = Integer.parseInt(coordenadasRecebidas[1]);
             } catch (Exception NumberFormatException) {
-                System.out.println("kaka");
                 colunaInvalida = true;
             }
 
             if(colunaInvalida){
-                System.out.println("coluna invalida");
+                System.out.println( Colors.MAGENTA_BOLD + "COLUNA INVÁLIDA" + Colors.RESET);
                 colunaInvalida = false;
                 coordenadas = " ";
                 continue;
@@ -95,15 +97,15 @@ public class UserPlayer extends Player {
             coordenadasInformadas[0] = linha;
             coordenadasInformadas[1] = coluna;
 
-            if (!posicaoDisponivelParaNavio(coordenadasInformadas) && this.quantidadeDeNavios != 2) {
-                System.err.println(Colors.MAGENTA + "Ops! Você já posicionou um navio aqui, tente outra coordenada...");
+            if (!posicaoDisponivelParaNavio(coordenadasInformadas) && this.quantidadeDeNavios != TOTAL_NAVIOS) {
+                System.out.println(Colors.MAGENTA_BOLD + "Ops! Você já posicionou um navio aqui," +
+                        " tente outra coordenada..." + Colors.RESET);
+
                 colunaInvalida = false;
                 coordenadas = " ";
                 continue;
             }
-
             coordenadaInvalida = false;
-            System.out.println(coordenadaInvalida);
         }
         return coordenadasInformadas;
     }
@@ -112,7 +114,7 @@ public class UserPlayer extends Player {
     public void atacarNavio(Player adversario) {
         boolean posicaoDisponivel = true;
 
-        int[] coordenadasInformadas = {0, 0};
+        int[] coordenadasInformadas = new int[2];
         int linha;
         int coluna;
 
@@ -125,7 +127,7 @@ public class UserPlayer extends Player {
             coluna = coordenadasInformadas[1];
 
             if (this.registroTirosJogador[linha][coluna] != " ") {
-                System.err.println(Colors.MAGENTA + "Você já atirou nesta posição, tente outra!");
+                System.out.println(Colors.MAGENTA_BOLD + "Você já atirou nesta posição, tente outra!" + Colors.RESET);
             } else {
                 this.registroTirosJogador[linha][coluna] = "shot";
                 this.coordenasdaDoTiro[0] = linha;

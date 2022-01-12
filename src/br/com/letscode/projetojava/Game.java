@@ -13,7 +13,7 @@ public class Game {
     public static void executarGame() {
         Scanner input = new Scanner(System.in);
         boolean continuarJogando = true;
-        int resposta = 0;
+        String resposta = "0";
 
         inicializarGame();
 
@@ -45,13 +45,13 @@ public class Game {
 
             exibirResultadosFinais(jogador, computador);
 
-            while( resposta != 1 || resposta != 2) {
+            while( resposta != "1" && resposta != "2") {
                 System.out.printf("%nDeseja jogar novamente ?%n [1] - Continuar \t [2]- Parar %n");
-                resposta = input.nextInt();
-                if (resposta == 1) {
+                resposta = input.next();
+                if (resposta.equals("1")) {
                     continuarJogando = true;
                     break;
-                } else if (resposta == 2) {
+                } else if (resposta.equals("2")){
                     continuarJogando = false;
                     System.out.println("Até a próxima! ");
                     break;

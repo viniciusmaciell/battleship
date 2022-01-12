@@ -29,19 +29,19 @@ public class UserPlayer extends Player {
     public void posicionarNavios() {
 
         Scanner input = new Scanner(System.in);
-        Integer resposta = 0;
+        String resposta = "0";
 
-        System.out.printf("%n%s, como gostaria de posicionar seus navios ?%n" +
-                "[1] - Manual \t [2] - Automático ", this.nome);
-
-        resposta = input.nextInt();
-
-        if (resposta == 1) {
-            posicionarManual();
-
-        } else if (resposta == 2) {
-            posicionarNaviosAuto();
-
+        while( resposta != "1" && resposta != "2") {
+            System.out.printf("%n%s, como gostaria de posicionar seus navios ?%n" +
+                    "[1] - Manual \t [2] - Automático ", this.nome);
+            resposta = input.next();
+            if (resposta.equals("1")) {
+                posicionarManual();
+                break;
+            } else if (resposta.equals("2")) {
+                posicionarNaviosAuto();
+                break;
+            }
         }
     }
 

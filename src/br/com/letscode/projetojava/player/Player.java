@@ -1,5 +1,6 @@
 package br.com.letscode.projetojava.player;
 
+import br.com.letscode.projetojava.Colors;
 import br.com.letscode.projetojava.Grelha;
 import br.com.letscode.projetojava.Modificadores;
 

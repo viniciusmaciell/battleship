@@ -94,9 +94,6 @@ public class Game {
         Grelha.imprimirGrelha(jogador.naviosPosicionados, jogador.nome);
         Grelha.imprimirGrelha(computador.naviosPosicionados, computador.nome);
 
-
-        //Game.exibirPlacar(jogador, computador);
-        //System.out.printf("%n");
     }
 
     public static void avaliarTiro(int[] posicaoDoTiro, Player jogadorAtacante, Player jogadorAtacado) {
@@ -152,7 +149,9 @@ public class Game {
                 System.out.print(Colors.CYAN_BACKGROUND);
                 System.out.print(" Tiro na água. " + Colors.RESET);
             } else {
-                System.out.printf(Colors.CYAN + "%n O computador ERROU o tiro, sua vez..." + Colors.RESET);
+                System.out.print(Colors.WHITE_BOLD_BRIGHT);
+                System.out.print(Colors.CYAN_BACKGROUND);
+                System.out.print("  \uD83D\uDCA6  O computador ERROU o tiro, sua vez... \uD83D\uDCA6  " + Colors.RESET);
             }
         }
     }

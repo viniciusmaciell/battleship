@@ -5,7 +5,7 @@
 
 Implementação de uma versão do famoso jogo de tabuleiro **Batalha Naval** utilizando a linguagem de programação **Java**.
 
- ### Regras
+ ### Instruções
 
 - O jogo terá apenas um Jogador, que disputará contra o Computador.
 

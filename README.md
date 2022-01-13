@@ -37,4 +37,4 @@ Este projeto teve a colaboração de:
  [**Camila Lacerda**](https://github.com/devcamila)  
 [**Uotana Carvalho**](https://github.com/uotana)  
 [**Vinícius Maciel**](https://github.com/viniciusmaciell)  
-com o objetivo de atender os requisitos do projeto final do módulo Introdução ao Java do curso **Santander Coders | Web Full-Stack** dirigido pela escola de programaçao **Lets'Code**.
+com o objetivo de atender os requisitos do projeto final do módulo Introdução ao Java do curso **Santander Coders | Web Full-Stack** dirigido pela escola de programação **Lets'Code**.

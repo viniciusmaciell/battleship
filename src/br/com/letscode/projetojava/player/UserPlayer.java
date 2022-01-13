@@ -17,7 +17,7 @@ public class UserPlayer extends Player {
 
         while (this.quantidadeDeNavios < this.TOTAL_NAVIOS) {
 
-            String mensagem = "\nPosicione seu " + (this.quantidadeDeNavios + 1) + "º navio [ linha coluna ] :";
+            String mensagem = "\nPosicione seu " + (this.quantidadeDeNavios + 1) + "º navio (Ex: A2):";
             coordenadasInformadas = escolherCoordenadas(mensagem);
             adicionarNavio(coordenadasInformadas);
             Grelha.imprimirGrelha(this.naviosPosicionados, nome);
@@ -65,6 +65,9 @@ public class UserPlayer extends Player {
             while (coordenadas.length() != 2) {
                 System.out.println(mensagem);
                 coordenadas = input.next();
+                if (coordenadas.length() != 2){
+                    System.out.println(Colors.MAGENTA_BOLD + "A coordenada deve conter apenas 2 caracteres. Tente outra vez!" + Colors.RESET);
+                }
             }
 
             L = coordenadas.toUpperCase().charAt(0);
@@ -119,7 +122,7 @@ public class UserPlayer extends Player {
         int coluna;
 
         while (posicaoDisponivel) {
-            String mensagem = "Informe as coordenadas para o TIRO [ L - C ]: ";
+            String mensagem = "Informe as coordenadas para o TIRO (Ex: D5): ";
             coordenadasInformadas = escolherCoordenadas(mensagem);
             System.out.printf("%n");
 

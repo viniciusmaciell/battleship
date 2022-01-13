@@ -3,16 +3,48 @@ package br.com.letscode.projetojava.player;
 import br.com.letscode.projetojava.Colors;
 import br.com.letscode.projetojava.Game;
 import br.com.letscode.projetojava.Grelha;
+import br.com.letscode.projetojava.Modificadores;
 
 import java.util.Scanner;
 
 public class UserPlayer extends Player {
 
     public UserPlayer() {
+        this.instrucoesGame();
         Grelha.imprimirGrelha(this.naviosPosicionados, this.nome);
     }
 
-    public void posicionarManual() {
+    public void instrucoesGame() {
+        Scanner input = new Scanner(System.in);
+        String resposta = "0";
+
+        while (resposta != "1" && resposta != "2") {
+            System.out.printf("%n%s, você gostaria de instruções sobre o jogo?%n" +
+                    "[1] - Sim \t [2] - Não ", this.nome );
+            resposta = input.next();
+            if (resposta.equals("1")) {
+                System.out.printf("%n");
+                System.out.print(Colors.WHITE_BOLD_BRIGHT);
+                System.out.print(Colors.BLUE_BACKGROUND);
+                System.out.println(" INSTRUÇÕES BATALHA NAVAL " + Colors.RESET);
+                System.out.printf(Colors.WHITE_BRIGHT + "Para começar você deve distribuir 10 navios na grelha, podendo escolher as posições de forma manual ou automática. %n" +
+                        Colors.WHITE_BRIGHT + "Seus movimentos no jogo serão representados da seguinte maneira:%n" + Colors.RESET +
+                        Colors.WHITE_BOLD_BRIGHT + "Seus navios: " + Colors.RESET + Modificadores.NAVIO + " %n" +
+                        Colors.WHITE_BOLD_BRIGHT + "Tiro na água: " + Colors.RESET + Modificadores.TIRO_NA_AGUA + " %n" +
+                        Colors.WHITE_BOLD_BRIGHT + "Tiro na água com seu navio posicionado: " + Colors.RESET + Modificadores.TIRO_NA_AGUA_NAVIO + " %n" +
+                        Colors.WHITE_BOLD_BRIGHT + "Tiro certeiro: " + Colors.RESET + Modificadores.TIRO_NO_NAVIO + " %n" +
+                        Colors.WHITE_BOLD_BRIGHT + "Tiro certeiro com seu navio posicionado: " + Colors.RESET + Modificadores.TIRO_NO_NAVIO_NAVIO + " %n" +
+                        Colors.WHITE_BRIGHT + "O primeiro a derrubar os 10 navios do oponente, vence o jogo. %n" +
+                        Colors.GREEN_BOLD + " ☘    BOA SORTE    ☘ " + Colors.RESET + "%n"
+                );
+                break;
+            } else if (resposta.equals("2")) {
+                break;
+            }
+        }
+    }
+
+      public void posicionarManual() {
         int[] coordenadasInformadas;
 
         while (this.quantidadeDeNavios < this.TOTAL_NAVIOS) {

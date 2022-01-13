@@ -66,7 +66,6 @@ public class Game {
         System.out.print(Colors.WHITE_BACKGROUND_BRIGHT);
         System.out.println(Colors.BLACK_BOLD + jogador.nome + " " + jogador.naviosAbatidos + " x " + computador.naviosAbatidos + " " + computador.nome + Colors.RESET_BACKGROUND);
 
-        //System.out.printf("%nPLACAR%n%s %d x %d %s%n", jogador.nome, jogador.naviosAbatidos,computador.naviosAbatidos, computador.nome);
     }
 
     public static void inicializarGame() {
@@ -144,6 +143,7 @@ public class Game {
                 System.out.println("  \uD83D\uDCA6  SPLASH... Tiro na água. \uD83D\uDCA6  " + Colors.RESET);
 
             } else {
+                System.out.printf("%n");
                 System.out.print(Colors.BLACK_BOLD);
                 System.out.print(Colors.CYAN_BACKGROUND);
                 System.out.print("  \uD83D\uDCA6  O computador ERROU o tiro. \uD83D\uDCA6  " + Colors.RESET);

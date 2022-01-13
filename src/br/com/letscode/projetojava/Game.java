@@ -7,6 +7,8 @@ import java.util.Scanner;
 
 public class Game {
 
+    public Game(){}
+
     public static void executarGame() {
         Scanner input = new Scanner(System.in);
         boolean continuarJogando = true;

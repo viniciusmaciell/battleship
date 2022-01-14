@@ -1,5 +1,11 @@
-# Naval Battle
 
+
+ # Naval Battle
+
+
+<div align="center">
+<img height="100%" width="80%" src="https://raw.githubusercontent.com/viniciusmaciell/naval_battle/develop/gif/naval-battle.gif"/>
+</div>
 
  ### Objetivo
 

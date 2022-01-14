@@ -1,6 +1,6 @@
 
 
- # Naval Battle
+ # Battleship
 
 
 <div align="center">

@@ -1,6 +1,6 @@
 package br.com.letscode.projetojava;
 
-public class Grelha {
+public class Grid {
 
     public static void mostrarCabecalho(String nome) {
 

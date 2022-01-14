@@ -1,7 +1,7 @@
 package br.com.letscode.projetojava.player;
 
-import br.com.letscode.projetojava.Grelha;
-import br.com.letscode.projetojava.Modificadores;
+import br.com.letscode.projetojava.Grid;
+import br.com.letscode.projetojava.Markers;
 
 import java.util.Random;
 import java.util.Scanner;
@@ -11,23 +11,18 @@ public abstract class Player {
     public String nome;
     public int quantidadeDeNavios;
     public int naviosAbatidos;
-    public int naviosRestantes;
 
-    final int DIMENSAO_TABULEIRO = 10;
     public final int TOTAL_NAVIOS = 10;
 
     Integer[] coordenasdaDoTiro = new Integer[2];
-    public String[][] naviosPosicionados = new String[DIMENSAO_TABULEIRO][DIMENSAO_TABULEIRO];
-    String[][] registroTirosJogador = new String[DIMENSAO_TABULEIRO][DIMENSAO_TABULEIRO];
+    public String[][] naviosPosicionados = new String[TOTAL_NAVIOS][TOTAL_NAVIOS];
+    String[][] registroTirosJogador = new String[TOTAL_NAVIOS][TOTAL_NAVIOS];
 
     public Player() {
-
         this.naviosAbatidos = 0;
-        this.naviosRestantes = 10;
         setNome();
         inicializarGrelha(this.naviosPosicionados);
         inicializarGrelha(this.registroTirosJogador);
-
     }
 
     public void setNome() {
@@ -37,9 +32,8 @@ public abstract class Player {
     }
 
     public void inicializarGrelha(String[][] grelha) {
-
-        for (int i = 0; i < DIMENSAO_TABULEIRO; i++) {
-            for (int j = 0; j < DIMENSAO_TABULEIRO; j++) {
+        for (int i = 0; i < TOTAL_NAVIOS; i++) {
+            for (int j = 0; j < TOTAL_NAVIOS; j++) {
                 grelha[i][j] = " ";
             }
         }
@@ -62,25 +56,25 @@ public abstract class Player {
         int[] coordenadasInformadas;
 
         while (this.quantidadeDeNavios < this.TOTAL_NAVIOS) {
-
             coordenadasInformadas = gerarCoordenadasAuto();
-
             if (posicaoDisponivelParaNavio(coordenadasInformadas)) {
                 adicionarNavio(coordenadasInformadas);
             }
         }
+
         System.out.printf("%n");
+
         if (this instanceof UserPlayer) {
-            Grelha.imprimirGrelha(this.naviosPosicionados, this.nome);
+            Grid.imprimirGrelha(this.naviosPosicionados, this.nome);
         }
     }
 
     public boolean posicaoDisponivelParaNavio(int[] coordenadas) {
-        return this.naviosPosicionados[coordenadas[0]][coordenadas[1]] == Modificadores.AGUA.toString();
+        return this.naviosPosicionados[coordenadas[0]][coordenadas[1]] == Markers.AGUA.toString();
     }
 
     public void adicionarNavio(int[] coordenadas) {
-        this.naviosPosicionados[coordenadas[0]][coordenadas[1]] = Modificadores.NAVIO.toString();
+        this.naviosPosicionados[coordenadas[0]][coordenadas[1]] = Markers.NAVIO.toString();
         this.quantidadeDeNavios++;
     }
 

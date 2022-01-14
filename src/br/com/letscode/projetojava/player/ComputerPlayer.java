@@ -25,8 +25,6 @@ public class ComputerPlayer extends Player {
 
             if (this.registroTirosJogador[linha][coluna] == " ") {
                 this.registroTirosJogador[linha][coluna] = "shot";
-//                this.coordenasdaDoTiro[0] = linha;
-//                this.coordenasdaDoTiro[1] = coluna;
                 posicaoDisponivel = false;
             }
         }

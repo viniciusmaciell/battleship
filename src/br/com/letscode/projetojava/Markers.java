@@ -1,6 +1,6 @@
 package br.com.letscode.projetojava;
 
-public enum Modificadores {
+public enum Markers {
 
     NAVIO(Colors.YELLOW_BRIGHT + "N" + Colors.RESET),
     AGUA(" "),
@@ -11,7 +11,7 @@ public enum Modificadores {
 
     private final String simbolo;
 
-    Modificadores(String simbolo) {
+    Markers(String simbolo) {
         this.simbolo = simbolo;
     }
 
